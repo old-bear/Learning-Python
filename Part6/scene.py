@@ -1,13 +1,12 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
-#
-# Author: Rujie, Jiang jrjbear@gmail.com
-# Date: Thu Sep  3 17:42:24 2015
-# File: scene.py
-# Description: 
+#!/usr/bin/env python3
+# Author: Rujie Jiang jrjbear@gmail.com
+# Date: Fri Apr  8 00:47:52 2016
+
+"""A simulation of a scene in a small play
+"""
 
 class Actor:
-    def line(self): print self.name + ": " + repr(self.message())
+    def line(self): print(self.name + ": " + repr(self.message()))
 
 class Customer(Actor):
     name = 'customer'
@@ -29,6 +28,7 @@ class Scene:
         for actor in self.actors:
             actor.line()
 
-if __name__ == '__main__':
+            
+if __name__ == "__main__":
     s = Scene()
     s.action()

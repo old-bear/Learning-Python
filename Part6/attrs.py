@@ -1,28 +1,38 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
-#
-# Author: Rujie, Jiang jrjbear@gmail.com
-# Date: Mon Aug 31 23:54:05 2015
-# File: attrs.py
-# Description: 
+#!/usr/bin/env python3
+# Author: Rujie Jiang jrjbear@gmail.com
+# Date: Thu Apr  7 23:12:01 2016
+
+"""A class which trace all its attribute qualifications,
+though operators can't be intercepted in py3
+"""
 
 class Attrs:
-    def __getattr__(self, name):
-        print "Fetch attribute=%s" % name
+    def __getattribute__(self, name):
+        print("Fetch attribute=%s" % name)
+        return object.__getattribute__(self, name)
 
     def __setattr__(self, name, value):
-        print "Assign value=%s to attribute=%s" % (value, name)
+        print("Assign value=%s to attribute=%s" % (value, name))
+        return object.__setattr__(self, name, value)
+        
 
 def CatchTypeError(func):
     try:
         func()
-    except TypeError:
-        pass                    # Expected
-        
-if __name__ == '__main__':
-    a = Attrs();
-    a.x
-    a.y = 4
-    CatchTypeError(lambda: a + 3)
-    CatchTypeError(lambda: a[4])
+    except TypeError as e:
+        print("Caught TypeError:", e)
+
     
+if __name__ == "__main__":
+    a = Attrs();
+    print("a =", a)
+    print("a.x = 4 => ", end='')
+    a.x = 4
+    print("a.x += 4 => ")
+    a.x += 4
+
+    print("\nHowever, builtin operations can' be intercepted")
+    print("a + 3 => ", end='')
+    CatchTypeError(lambda: a + 3)
+    print("a[4] => ", end='')
+    CatchTypeError(lambda: a[4])    

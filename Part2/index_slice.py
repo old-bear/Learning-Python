@@ -1,10 +1,9 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
-#
-# Author: Rujie, Jiang jrjbear@gmail.com
-# Date: Tue Jul 28 22:43:22 2015
-# File: index_slice.py
-# Description: Experiment for indexing, slicing, and del
+#!/usr/bin/env python3
+# Author: Rujie Jiang jrjbear@gmail.com
+# Date: Sat Mar 26 23:58:15 2016
+
+"""Experiment for indexing, slicing, and del
+"""
 
 L = [0, 1, 2, 3]
 print("L = %s" % L)

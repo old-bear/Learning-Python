@@ -1,10 +1,11 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
-#
-# Author: Rujie, Jiang jrjbear@gmail.com
-# Date: Wed Sep  2 00:08:51 2015
-# File: set.py
-# Description: 
+#!/usr/bin/env python3
+# Author: Rujie Jiang jrjbear@gmail.com
+# Date: Thu Apr  7 23:33:20 2016
+
+"""A new set which supports doing union/intersection multiple objects
+simultaneously, though this can't be called by operator expressions
+(only 2 operands allowed)
+"""
 
 class Set:
     def __init__(self, value = []):
@@ -37,6 +38,7 @@ class Set:
     def __repr__(self):          return 'Set:' + repr(self.data)
     def __iter__(self):          return iter(self.data)
 
+    
 class MySet(Set):
     def intersect(self, *others):
         res = []
@@ -67,27 +69,25 @@ class MySet(Set):
 if __name__ == "__main__":
     x = Set([1, 2, 3])
     y = Set([3, 4, 5])
-    print "-" * 20, "Test for Set", "-" * 20
-    print "%s & %s = %s" % (x, y, x & y)
-    print "%s | %s = %s" % (x, y, x | y)
+    print("-" * 20, "Test for Set", "-" * 20)
+    print("%s & %s = %s" % (x, y, x & y))
+    print("%s | %s = %s" % (x, y, x | y))
 
-    s = Set('hello')
-    print "s = %s, s[2] = %s" % (s, s[2])
-    print "Iterating %s: " % s,
+    s = Set("hello")
+    print("s = %s, s[2] = %s" % (s, s[2]))
+    print("Iterating %s: " % s, end='')
     for c in s:
-        print c,
-    print ""
-    print "%s & %s = %s\n" % (s, 'world', s & 'world')
+        print(c, end='')
+    print("\n%s & %s = %s\n" % (s, "world", s & "world"))
 
-    print "-" * 20, "Test for MySet", "-" * 20
-    xx = MySet('hello')
-    yy = MySet('world')
-    ss = 'love'
-    print "Union of %s, %s, %s = %s" % (
-        xx, yy, ss, xx.union(yy, ss))
-    print "Intersection of %s, %s, %s = %s" % (
-        xx, yy, ss, xx.intersect(yy, ss))
-    print "%s + %s = %s" % (xx, yy, xx + yy)
-    print "%s.append('z') =>" % xx,
+    print("-" * 20, "Test for MySet", "-" * 20)
+    xx = MySet("hello")
+    yy = MySet("world")
+    ss = list("love")
+    print("Union of <%s>, <%s>, <%s> = %s" % (xx, yy, ss, xx.union(yy, ss)))
+    print("Intersection of <%s>, <%s>, <%s> = %s"
+          % (xx, yy, ss, xx.intersect(yy, ss)))
+    print("%s + %s = %s" % (xx, yy, xx + yy))
+    print("%s.append('z') => " % xx, end='')
     xx.append('z')
-    print xx
+    print(xx)

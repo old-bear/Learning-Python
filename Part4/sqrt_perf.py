@@ -1,31 +1,53 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
-#
-# Author: Rujie, Jiang jrjbear@gmail.com
-# Date: Sat Aug 15 12:58:24 2015
-# File: sqrt_perf.py
-# Description: 
+#!/usr/bin/env python3
+# Author: Rujie Jiang jrjbear@gmail.com
+# Date: Sat Apr  2 21:41:05 2016
 
-import math
+"""Different ways to calculate square root and their performance
+"""
+
 import timeit
 
-mylist = range(1000)
+setup = """
+import math
+l = range(1000)
 
-def math_sqrt(l):
-    return [math.sqrt(val) for val in l]
+def for_loop_sqrt(l):
+    res = []
+    for val in l:
+        res.append(math.sqrt(val))
+    return res
 
-def operator_sqrt(l):
+def list_comp_operator_sqrt(l):
     return [val ** 0.5 for val in l]
 
-def builtin_pow(l):
+def list_comp_math_sqrt(l):
+    return [math.sqrt(val) for val in l]
+
+def list_comp_pow_sqrt(l):
     return [pow(val, 0.5) for val in l]
 
-print ("Best of 3 round in running math.sqrt for 10000 times: %s"
-       % min(timeit.repeat(stmt=lambda: math_sqrt(mylist),
-                           repeat=3, number=10000)))
-print ("Best of 3 round in running ** for 10000 times: %s"
-       % min(timeit.repeat(stmt=lambda: operator_sqrt(mylist),
-                           repeat=3, number=10000)))
-print ("Best of 3 round in running pow for 10000 times: %s"
-       % min(timeit.repeat(stmt=lambda: builtin_pow(mylist),
-                           repeat=3, number=10000)))
+def map_sqrt(l):
+    return list(map(math.sqrt, l))
+
+def generator_sqrt(l):
+    return list(val ** 0.5 for val in l)
+"""
+
+print("Best of 3 round in running for_loop_sqrt 10000 times: ",
+      min(timeit.repeat(stmt="for_loop_sqrt(l)", setup=setup,
+                        repeat=3, number=10000)))
+print("Best of 3 round in running map_sqrt 10000 times: ",
+      min(timeit.repeat(stmt="map_sqrt(l)", setup=setup,
+                        repeat=3, number=10000)))
+print("Best of 3 round in running generator_sqrt 10000 times: ",
+      min(timeit.repeat(stmt="generator_sqrt(l)", setup=setup,
+                        repeat=3, number=10000)))
+print("Best of 3 round in running list_comp_operator_sqrt 10000 times: ",
+      min(timeit.repeat(stmt="list_comp_operator_sqrt(l)", setup=setup,
+                        repeat=3, number=10000)))
+print("Best of 3 round in running list_comp_math_sqrt 10000 times: ",
+      min(timeit.repeat(stmt="list_comp_math_sqrt(l)", setup=setup,
+                        repeat=3, number=10000)))
+print("Best of 3 round in running list_comp_pow_sqrt 10000 times: ",
+      min(timeit.repeat(stmt="list_comp_pow_sqrt(l)", setup=setup,
+                        repeat=3, number=10000)))

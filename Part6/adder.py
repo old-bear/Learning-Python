@@ -1,28 +1,38 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
-#
-# Author: Rujie, Jiang jrjbear@gmail.com
-# Date: Mon Aug 31 22:20:20 2015
-# File: adder.py
-# Description: 
+#!/usr/bin/env python3
+# Author: Rujie Jiang jrjbear@gmail.com
+# Date: Thu Apr  7 22:02:29 2016
+
+"""Interface of add and its implementataions on list/dict 
+"""
 
 class Adder:
-    def __init__(self, start):
-        self.data = start
+    def __init__(self, start=[]):
+        if isinstance(start, Adder):
+            self.data = start.data
+        else:
+            self.data = start
 
     def add(self, y):
-        print "Not Implemented"
+        """Returns the result whose type=type(y)
+        """ 
+        print("Not Implemented")
 
     def __add__(self, y):
-        return self.add(y)
+        """Returns a new object of Adder as the result
+        """
+        return self.__class__(self.add(y))
 
     __radd__ = __add__
 
+    def __repr__(self):
+        return "%s<%s>" % (self.__class__.__name__, self.data)
 
+    
 class ListAdder(Adder):
     def add(self, y):
         return self.data + y
 
+    
 class DictAdder(Adder):
     def add(self, y):
         tmp = self.data.copy()
@@ -30,12 +40,13 @@ class DictAdder(Adder):
         return tmp
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     x = Adder(3)
+    print("%s.add(4): " % x, end='')
     x.add(4)                    # Not Implemented
 
-    x = ListAdder([3])
-    print "ListAdder([3]) + [4] = %s" % (x + [4])
+    y = ListAdder([3])
+    print("%s + [4] = %s" % (y, y + [4]))
 
-    x = DictAdder({'a':3})
-    print "DictAdder({'a':3}) + {'a':4} = %s" % (x + {'a':4})
+    z = DictAdder({'a': 3})
+    print("{'a': 4} + %s = %s" % (z, {'a': 4} + z))

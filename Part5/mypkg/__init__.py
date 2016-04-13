@@ -1,9 +1,8 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
-#
-# Author: Rujie, Jiang jrjbear@gmail.com
-# Date: Sun Aug 16 23:01:08 2015
-# File: __init__.py
-# Description: 
+#!/usr/bin/env python3
+# Author: Rujie Jiang jrjbear@gmail.com
+# Date: Sun Apr  3 23:43:16 2016
 
-print "Loading mypkg"
+"""Initialization script for package `mypkg'
+"""
+
+print("Loading mypkg")

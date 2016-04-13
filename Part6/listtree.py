@@ -1,5 +1,10 @@
-#!python
-# File listtree.py (2.X + 3.X)
+#!/usr/bin/env python3
+# Author: Rujie Jiang jrjbear@gmail.com
+# Date: Fri Apr  8 00:11:42 2016
+
+"""An inspection mix-in class to show the entire class tree
+and all its attributes
+"""
 
 class ListTree:
     """
@@ -12,6 +17,7 @@ class ListTree:
         spaces = ' ' * (indent + 1)
         result = ''
         for attr in sorted(obj.__dict__):
+            if attr.startswith("_ListTree__"): continue
             if attr.startswith('__') and attr.endswith('__'):
                 result += spaces + '{0}\n'.format(attr)
             else:
@@ -23,6 +29,10 @@ class ListTree:
         return '(' + result + ')' if result else ''
 
     def __listclass(self, aClass, indent):
+        if aClass is ListTree:
+            # No need to list itself
+            return ''
+        
         dots = '.' * indent
         if aClass in self.__visited:
             return '\n{0}<Class {1}{2}:, address {3}: (see above)>\n'.format(
@@ -54,6 +64,9 @@ class ListTree:
                            id(self),
                            here, above)
 
+    
 if __name__ == '__main__': 
-    import testmixin
-    testmixin.tester(ListTree)
+    from urllib.request import HTTPSHandler
+    class MyHandler(ListTree, HTTPSHandler): pass
+    test = MyHandler()
+    print("CLASS TREE OF urllib.request.HTTPSHandler:\n\n", test)
