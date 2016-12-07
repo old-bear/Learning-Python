@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 # Author: Rujie Jiang jrjbear@gmail.com
 # Date: Fri Apr  8 00:47:52 2016
 

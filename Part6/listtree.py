@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 # Author: Rujie Jiang jrjbear@gmail.com
 # Date: Fri Apr  8 00:11:42 2016
 
@@ -66,7 +66,7 @@ class ListTree:
 
     
 if __name__ == '__main__': 
-    from urllib.request import HTTPSHandler
+    from urllib2 import HTTPSHandler
     class MyHandler(ListTree, HTTPSHandler): pass
     test = MyHandler()
     print("CLASS TREE OF urllib.request.HTTPSHandler:\n\n", test)

@@ -1,6 +1,6 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 # Author: Rujie Jiang jrjbear@gmail.com
-# Date: Sat Mar 19 21:55:46 2016
+# Date: Wed Dec  7 23:49:55 2016
 
 """Hello world
 """
